@@ -8,12 +8,12 @@ namespace UsersLib
 {
     public class UserRepo
     {
-        private List<User> _users { get; set; } = new List<User>();
+        private List<User> _users = new List<User>();
         private int _nextId { get; set; }
 
         public UserRepo()
         {
-            
+            Add(new User("testName", "testPassword"));
         }
 
         public List<User> GetAll()
@@ -21,7 +21,7 @@ namespace UsersLib
             return new List<User>(_users);
         }
 
-        public User Get(int id)
+        public User? Get(int id)
         {
             User? user = _users.Find(p => p.Id == id);
             if (user != null)
@@ -40,7 +40,7 @@ namespace UsersLib
             return user;
         }
 
-        public User Delete(int id)
+        public User? Delete(int id)
         {
             if (Get(id) != null)
             {
@@ -48,6 +48,23 @@ namespace UsersLib
 
                 _users.Remove(Get(id));
                 return user;
+            }
+            return null;
+        }
+        public User? Update(int id, string? name, string? password)
+        {
+            if (Get(id) != null) 
+            {
+                User updatedUser = Get(id);
+                if (name != null)
+                {
+                    updatedUser.Name = name;
+                }
+                if (password != null)
+                {
+                    updatedUser.Password = password;
+                }
+                return updatedUser;
             }
             return null;
         }
