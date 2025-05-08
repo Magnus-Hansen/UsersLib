@@ -8,8 +8,9 @@ namespace UsersLib
 {
     public class UserRepo
     {
-        private List<User> _users = new List<User>();
-        private int _nextId { get; set; }
+        //private List<User> _users = new List<User>();
+        private SortedList<int, User> _users = new SortedList<int, User>();
+        private int _nextId { get; set; } = 0;
 
         public UserRepo()
         {
@@ -18,12 +19,14 @@ namespace UsersLib
 
         public List<User> GetAll()
         {
-            return new List<User>(_users);
+            //return new List<User>(_users);
+            return new List<User>(_users.Values);
         }
 
         public User? Get(int id)
         {
-            User? user = _users.Find(p => p.Id == id);
+            //User? user = _users.Find(p => p.Id == id);
+            User? user = _users.GetValueAtIndex(id);
             if (user != null)
             {
                 return user;
@@ -35,8 +38,9 @@ namespace UsersLib
         {
             user.Validate();
             _nextId++;
-            user.Id = _nextId;
-            _users.Add(user);
+            /*user.Id = _nextId;
+            _users.Add(user);*/
+            _users.Add(_nextId, user);
             return user;
         }
 
@@ -46,19 +50,20 @@ namespace UsersLib
             {
                 User user = Get(id);
 
-                _users.Remove(Get(id));
+                //_users.Remove(Get(id));
+                _users.RemoveAt(id);
                 return user;
             }
             return null;
         }
-        public User? Update(int id, string? name, string? password)
+        /*public User? Update(int id, string? name, string? password)
         {
             if (Get(id) != null) 
             {
                 User updatedUser = Get(id);
                 if (name != null)
                 {
-                    updatedUser.Name = name;
+                    updatedUser.UserName = name;
                 }
                 if (password != null)
                 {
@@ -67,6 +72,6 @@ namespace UsersLib
                 return updatedUser;
             }
             return null;
-        }
+        }*/
     }
 }

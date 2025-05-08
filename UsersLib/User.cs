@@ -2,18 +2,18 @@
 {
     public class User
     {
-        public int Id { get; set; }
-        public string? Name { get; set; }
+        //public int Id { get; set; }
+        public string? Username { get; set; }
         public string? Password { get; set; }
 
-        public User(string? name, string? password)
+        public User(string? username, string? password)
         {
-            Name = name;
+            Username = username;
             Password = password;
         }
         public void ValidateName()
         {
-            if (Name == null) throw new ArgumentNullException("Name can't be null");
+            if (Username == null) throw new ArgumentNullException("Name can't be null");
         }
         public void ValidatePassword()
         {
@@ -26,7 +26,8 @@
         }
         public override string ToString()
         {
-            return $"Id: {Id} -- Name: {Name} -- Password: {Password}";
+            //return $"Id: {Id} -- Name: {UserName} -- Password: {Password}";
+            return $"Name: {Username} -- Password: {Password}";
         }
     }
 }
