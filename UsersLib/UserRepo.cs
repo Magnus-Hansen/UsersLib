@@ -9,7 +9,8 @@ namespace UsersLib
     public class UserRepo
     {
         //private List<User> _users = new List<User>();
-        private SortedList<int, User> _users = new SortedList<int, User>();
+        //private SortedList<int, User> _users = new SortedList<int, User>();
+        private SortedDictionary<int, User> _users = new SortedDictionary<int, User>();
         private int _nextId { get; set; } = 0;
 
         public UserRepo()
@@ -26,7 +27,8 @@ namespace UsersLib
         public User? Get(int id)
         {
             //User? user = _users.Find(p => p.Id == id);
-            User? user = _users.GetValueAtIndex(id);
+            //User? user = _users.GetValueAtIndex(id);
+            User? user = _users.FirstOrDefault(p => p.Key == id).Value;
             if (user != null)
             {
                 return user;
@@ -51,7 +53,8 @@ namespace UsersLib
                 User user = Get(id);
 
                 //_users.Remove(Get(id));
-                _users.RemoveAt(id);
+                //_users.RemoveAt(id);
+                _users.Remove(id);
                 return user;
             }
             return null;
