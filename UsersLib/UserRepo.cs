@@ -15,7 +15,7 @@ namespace UsersLib
 
         public UserRepo()
         {
-            Add(new User("testName", "testPassword"));
+            //Add(new User("testName", "testPassword"));
         }
 
         public List<User> GetAll()
